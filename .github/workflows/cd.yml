@@ -1,0 +1,92 @@
+name: Continuous Deployment
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: Continuous Deployment
+  cancel-in-progress: false
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+
+      - name: Cache npm
+        uses: actions/cache@v6
+        with:
+          path: ~/.npm
+          key: npm-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Install node-gyp
+        run: npm install -g node-gyp
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test
+        run: npm test
+
+      - name: Generate static site
+        run: npm run generate
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: .output/public
+
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs:
+      - package
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
+
+  # Tell IndexNow engines (Bing, Yandex, ...) which pages exist. Sends only
+  # the public URLs from the sitemap. Never blocks or fails a deploy.
+  indexnow:
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs:
+      - deploy
+    continue-on-error: true
+    env:
+      HOST: schmeide.autobutler.org
+      # Public by design; must match public/<key>.txt.
+      KEY: 89050d02d985339727b93f13f5238088
+    steps:
+      - name: Ping IndexNow with sitemap URLs
+        run: |
+          curl -fsSL "https://$HOST/sitemap.xml" \
+            | grep -o '<loc>[^<]*</loc>' \
+            | sed -e 's/<loc>//' -e 's/<\/loc>//' \
+            | jq -R . | jq -s \
+              --arg host "$HOST" --arg key "$KEY" \
+              '{host: $host, key: $key, keyLocation: "https://\($host)/\($key).txt", urlList: .}' \
+            | curl -fsS -X POST https://api.indexnow.org/indexnow \
+                -H 'Content-Type: application/json; charset=utf-8' \
+                --data-binary @- \
+            || echo "::warning::IndexNow ping failed; deploy is unaffected."

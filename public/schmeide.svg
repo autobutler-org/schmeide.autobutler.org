@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="schmeide">
+  <rect width="64" height="64" rx="14" fill="#111111"/>
+  <path fill="#f7f6f3" d="M8 20h34c6 0 11-1.5 14-4.5V24c-3 4-7.5 6-13 6h-3c-3.3 0-5 2-5 5v3h5v6H24v-6h5v-3c0-3-1.7-5-5-5h-4c-6 0-10.5-3.5-12-10z"/>
+  <path fill="#e6c475" d="M40 10l2 5-5-2zM47 8l1 4-4-1zM33 12l1.5 3.5-3.5-1.5z"/>
+</svg>

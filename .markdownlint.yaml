@@ -1,0 +1,14 @@
+default: true
+MD007:
+  indent: 2
+MD013:
+  line_length: 120
+  # Prettier pads tables to align columns, and code blocks quote schmeide's
+  # output verbatim, so neither can be wrapped.
+  tables: false
+  code_blocks: false
+MD024:
+  siblings_only: true
+MD025: false
+MD033: false
+MD041: false

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a Security Vulnerability (Private)
+    url: https://github.com/autobutler-org/schmeide.autobutler.org/security/advisories/new
+    about: For exploitable vulnerabilities — file a private advisory, not a public issue.
+  - name: Something wrong with schmeide itself?
+    url: https://github.com/autobutler-org/schmeide/issues/new/choose
+    about: This tracker is for the website. Bugs in the product belong in the product repository.

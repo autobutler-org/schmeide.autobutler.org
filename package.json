@@ -1,0 +1,59 @@
+{
+  "name": "schmeide.autobutler.org",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "postinstall": "nuxt prepare",
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check-updates": "ncu -u",
+    "lint:eslint": "eslint .",
+    "lint:types": "nuxt typecheck",
+    "lint:prettier": "prettier --check .",
+    "lint:md": "markdownlint-cli2 \"**/*.md\" \"!node_modules/**\"",
+    "lint": "concurrently -m1 npm:lint:*",
+    "fix:eslint": "eslint . --fix",
+    "fix:prettier": "prettier --write .",
+    "fix:md": "markdownlint-cli2 --fix \"**/*.md\" \"!node_modules/**\"",
+    "fix": "concurrently -m1 npm:fix:*"
+  },
+  "dependencies": {
+    "@nuxt/content": "^3.16.1",
+    "better-sqlite3": "^13.0.3",
+    "nuxt": "^4.4.8",
+    "vue": "^3.5.43",
+    "vue-router": "^5.3.1"
+  },
+  "devDependencies": {
+    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource-variable/geist-mono": "^5.3.0",
+    "@fontsource-variable/newsreader": "^5.3.0",
+    "@nuxt/eslint": "^1.15.1",
+    "@types/node": "^26.5.1",
+    "@vitejs/plugin-vue": "^6.0.9",
+    "@vitest/eslint-plugin": "^1.6.27",
+    "@vue/test-utils": "^2.5.0",
+    "concurrently": "^10.0.5",
+    "eslint": "^10.10.0",
+    "jsdom": "^30.1.0",
+    "markdownlint-cli2": "^0.24.0",
+    "npm-check-updates": "^23.1.0",
+    "prettier": "^3.9.8",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.1",
+    "vue-tsc": "^3.3.11"
+  },
+  "overrides": {
+    "archiver-utils": {
+      "glob": "^13.0.6"
+    }
+  }
+}

@@ -1,0 +1,193 @@
+/*
+ * Design tokens. Component styles reference these rather than repeating
+ * literals. Media-query breakpoints stay literal because custom properties are
+ * not allowed in media conditions; keep them in sync with --breakpoint-* below.
+ *
+ * Direction: a warm, light, editorial page — bone canvas, white cards with a
+ * single hairline border, an off-black ink, and colour only as washed-out
+ * pastels on tags. A matching warm dark variant follows the system setting.
+ */
+:root {
+  color-scheme: light dark;
+
+  /* Type families (self-hosted via @fontsource, see nuxt.config.ts) */
+  --font-serif: "Newsreader Variable", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Geist Variable", "Helvetica Neue", Helvetica, system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", "SF Mono", ui-monospace, monospace;
+
+  /* Type scale */
+  --text-display: clamp(2.75rem, 1.5rem + 6vw, 6.5rem);
+  --text-h1: clamp(2.5rem, 1.6rem + 3.6vw, 4.25rem);
+  --text-h2: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
+  --text-h3: 1.4rem;
+  --text-lede: clamp(1.125rem, 1rem + 0.45vw, 1.3rem);
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+  --text-micro: 0.75rem;
+  --tracking-tight: -0.03em;
+  --tracking-snug: -0.015em;
+  --tracking-wide: 0.06em;
+  --leading-tight: 1.05;
+  --leading-body: 1.6;
+
+  /* Canvas and surfaces */
+  --color-canvas: #f7f6f3;
+  --color-canvas-veil: rgba(247, 246, 243, 0.86);
+  --color-surface: #ffffff;
+  --color-surface-sunken: #efeee9;
+  --color-grid-line: rgba(17, 17, 17, 0.045);
+  /* Mask stops: only their alpha matters, never shown as colour. */
+  --mask-opaque: #000;
+  --mask-clear: rgba(0, 0, 0, 0);
+
+  /* Lines */
+  --color-border: #e6e4de;
+  --color-border-strong: #d3d0c8;
+
+  /* Text */
+  --color-text: #2f3437;
+  --color-text-strong: #111111;
+  --color-text-muted: #6a6964;
+
+  /* Ink: solid controls (primary buttons) */
+  --color-ink: #111111;
+  --color-ink-hover: #333333;
+  --color-on-ink: #ffffff;
+
+  /* Focus ring */
+  --color-focus: #1f6c9f;
+
+  /* Muted pastels, for tags and small accents only */
+  --pastel-red: #fdebec;
+  --pastel-red-ink: #9f2f2d;
+  --pastel-blue: #e1f3fe;
+  --pastel-blue-ink: #1f6c9f;
+  --pastel-green: #edf3ec;
+  --pastel-green-ink: #346538;
+  --pastel-yellow: #fbf3db;
+  --pastel-yellow-ink: #956400;
+
+  /* Elevation: practically none */
+  --shadow-none: 0 0 0 rgba(0, 0, 0, 0);
+  --shadow-hover: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+  /* Shape */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 12px;
+  --radius-pill: 9999px;
+
+  /* Layout */
+  --content-width: 74rem;
+  --prose-width: 42rem;
+  --lede-width: 36rem;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  --section-gap: clamp(5rem, 10vw, 9rem);
+  --card-pad: clamp(1.5rem, 3vw, 2.25rem);
+  --header-height: 4rem;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 960px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 200ms;
+  --duration-reveal: 600ms;
+  --press: scale(0.98);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-canvas: #161615;
+    --color-canvas-veil: rgba(22, 22, 21, 0.86);
+    --color-surface: #1d1d1b;
+    --color-surface-sunken: #252523;
+    --color-grid-line: rgba(255, 255, 255, 0.035);
+
+    --color-border: #2d2c29;
+    --color-border-strong: #3e3d39;
+
+    --color-text: #d6d5d0;
+    --color-text-strong: #f2f1ee;
+    --color-text-muted: #9c9a94;
+
+    --color-ink: #f2f1ee;
+    --color-ink-hover: #d6d5d0;
+    --color-on-ink: #161615;
+
+    --color-focus: #8cc7ee;
+
+    --pastel-red: #3a2323;
+    --pastel-red-ink: #f2aaa7;
+    --pastel-blue: #172c3a;
+    --pastel-blue-ink: #8cc7ee;
+    --pastel-green: #1e2e20;
+    --pastel-green-ink: #9fcca2;
+    --pastel-yellow: #352d18;
+    --pastel-yellow-ink: #e6c475;
+
+    --shadow-hover: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-height) + 1rem);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--color-canvas);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01", "cv11";
+}
+
+::selection {
+  background: var(--pastel-yellow);
+  color: var(--color-text-strong);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+/*
+ * Scroll-entry reveal for major blocks: a 12px rise and fade tied to the
+ * element entering the viewport. Pure CSS (scroll-driven animation), so it
+ * needs no observer and costs nothing where unsupported — content is simply
+ * shown at rest. Gated on motion preference.
+ */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    animation: none;
+  }
+}

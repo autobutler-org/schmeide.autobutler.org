@@ -1,0 +1,43 @@
+name: Feature Request
+description: Request a change or addition to the website
+title: "[Feature] "
+labels: ["enhancement"]
+assignees: []
+type: Feature
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for shoveling more work onto us!
+
+        Asking for a change to schmeide itself? That belongs in the
+        [schmeide repository](https://github.com/autobutler-org/schmeide/issues/new/choose).
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      description: What part of the site would this apply to?
+      multiple: true
+      options:
+        - N/A
+        - Copy / wording
+        - Layout / styling
+        - New section or page
+        - Accessibility
+        - SEO / metadata
+        - Tooling / build
+    validations:
+      required: true
+  - type: textarea
+    id: whaddaya-want
+    attributes:
+      label: What do you want?
+      description: You can also ask that we remove things
+      placeholder: Help us make money brother
+    validations:
+      required: true
+  - type: textarea
+    id: attachments
+    attributes:
+      label: Extra info
+      description: Tell us whatever, even drop an image of Bingus if you want

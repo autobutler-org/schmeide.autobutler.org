@@ -1,0 +1,19 @@
+stateDiagram-v2
+    [*] --> pending: issue labeled + assigned
+    pending --> claimed: runner takes it
+    claimed --> working
+    working --> retrying: attempt failed
+    retrying --> claimed: delivered again
+    working --> gate_failed: gate fails or times out
+    working --> failed: attempts used up,<br/>bad config, or no linear stack
+    working --> reviewing: pull request opened
+    reviewing --> pr_opened: review passed,<br/>merge left to a person
+    reviewing --> review_failed: changes requested,<br/>rounds used up
+    reviewing --> merged: factory merge
+    reviewing --> merge_failed: could not merge
+    gate_failed --> pending: remove + re-add<br/>schmeide:ready
+    failed --> pending: remove + re-add<br/>schmeide:ready
+    pr_opened --> [*]
+    merged --> [*]
+    review_failed --> [*]
+    merge_failed --> [*]

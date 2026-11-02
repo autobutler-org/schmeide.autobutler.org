@@ -1,0 +1,12 @@
+flowchart TD
+    ev["issues webhook"] --> sig{"Signed, not a replay,<br/>under the rate limit?"}
+    sig -- no --> rej["Rejected, no job"]
+    sig -- yes --> ready{"labeled or assigned,<br/>on an open issue with an<br/>assignee and the ready label?"}
+    ready -- no --> ign["Ignored, no job"]
+    ready -- yes --> allow{"Repo in an allowed org<br/>or installation?"}
+    allow -- no --> ign
+    allow -- yes --> prev{"The issue's last job"}
+    prev -- "queued, running,<br/>or opened a PR" --> dup["Duplicate,<br/>nothing published"]
+    prev -- "none, failed,<br/>or gate_failed" --> live{"Steward has a<br/>live runner?"}
+    live -- yes --> sq["Steward's queue<br/>status pending"]
+    live -- no --> pool["Pool queue<br/>status pending"]

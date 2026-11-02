@@ -3,7 +3,7 @@ title: Command reference
 description: Every schmeide command, what it is for, and how flags and environment variables combine
 navigation:
   title: Command reference
-  order: 12
+  order: 13
 ---
 
 # Command reference

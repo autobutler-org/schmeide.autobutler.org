@@ -56,6 +56,7 @@ There is one control node. There can be many runners, on many machines.
 ## Where next
 
 - New to schmeide: the [quickstart](/docs/quickstart), from nothing to one pull request.
+- How a task flows, what a ready issue looks like, and how labels are used: [architecture](/docs/architecture).
 - Adding a repository: [repo config](/docs/repo-config).
 - Running it for a team: [running a control node](/docs/control-node) and [running a runner](/docs/runners).
 - A word you do not recognize: the [glossary](/docs/glossary).

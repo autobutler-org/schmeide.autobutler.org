@@ -68,10 +68,20 @@ setup>` SFCs), statically generated (`nuxt generate`) and served as static
   `better-sqlite3` (a `@nuxt/content` v3 build dependency). Anything new
   belongs in `devDependencies` unless it genuinely ships to the browser, and
   adding it needs a reason in the PR body.
-- Avoid heavy content-rendering dependencies (e.g. `mermaid`) — they've
-  caused repeated `npm audit` failures on a sibling site. Prefer plain
-  Markdown (prose, tables, lists) over embedded diagrams; describe an
-  architecture in words rather than pulling in a diagramming library.
+- Do not add `mermaid` (or another diagram renderer) as a dependency, and
+  do not render diagrams in the browser — it has caused repeated
+  `npm audit` failures on a sibling site. Diagrams are Mermaid sources in
+  `diagrams/*.mmd`, rendered ahead of time by `make diagrams` into
+  `public/assets/diagrams/<name>-light.svg` and `<name>-dark.svg`, and both
+  sources and SVGs are committed. `make diagrams` needs
+  `MERMAID_JS=<path to a local mermaid.min.js>` and a Chromium (`CHROMIUM`,
+  default `chromium`); `scripts/render-diagrams.mjs` maps the colors to the
+  tokens in `assets/main.css`.
+- Embed a diagram in a doc with a `<picture>` whose `<source>` serves the dark
+  SVG under `prefers-color-scheme: dark`, an `<img>` with the SVG's `width`
+  and `height`, and an `alt` that states what the diagram shows in words,
+  wrapped in a link to the full-size SVG. After changing a `.mmd`, rerun
+  `make diagrams` and update the `width` and `height` in the page.
 
 ## No data collection
 

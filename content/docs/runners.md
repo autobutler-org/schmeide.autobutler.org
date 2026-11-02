@@ -3,7 +3,7 @@ title: Running a runner
 description: Start a runner, check a machine with doctor, trust a work directory, and use pool runners
 navigation:
   title: Running a runner
-  order: 7
+  order: 8
 ---
 
 # Running a runner

@@ -3,7 +3,7 @@ title: Review and merge
 description: Review rounds, fix rounds, factory merge, merge queues, and branch protection
 navigation:
   title: Review and merge
-  order: 5
+  order: 6
 ---
 
 # Review and merge

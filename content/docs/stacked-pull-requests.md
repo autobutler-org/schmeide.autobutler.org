@@ -3,7 +3,7 @@ title: Stacked pull requests
 description: Build one issue on top of another with GitHub's issue dependencies
 navigation:
   title: Stacked pull requests
-  order: 6
+  order: 7
 ---
 
 # Stacked pull requests

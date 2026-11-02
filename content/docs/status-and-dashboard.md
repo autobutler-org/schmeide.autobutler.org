@@ -3,7 +3,7 @@ title: Status and dashboard
 description: See your runners and jobs with schmeide status, or on a local web page with schmeide dashboard
 navigation:
   title: Status and dashboard
-  order: 10
+  order: 11
 ---
 
 # Status and dashboard

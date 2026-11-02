@@ -3,7 +3,7 @@ title: Repo config
 description: Every key in .schmeide/config.toml, its default, and the errors it can produce
 navigation:
   title: Repo config
-  order: 4
+  order: 5
 ---
 
 # Repo config

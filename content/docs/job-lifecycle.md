@@ -3,7 +3,7 @@ title: How a job runs
 description: Every stage from a labeled issue to a finished job, and what happens when one fails
 navigation:
   title: How a job runs
-  order: 3
+  order: 4
 ---
 
 # How a job runs

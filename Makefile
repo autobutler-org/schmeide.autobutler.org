@@ -88,6 +88,15 @@ serve: ## Run the Nuxt dev server
 serve/prod: generate ## Serve the generated static site locally
 	npx serve $(OUT_DIR)/public
 
+##@ Diagrams
+
+MERMAID_JS ?=
+CHROMIUM ?= chromium
+
+.PHONY: diagrams
+diagrams: ## Render diagrams/*.mmd to SVG (needs MERMAID_JS=<path to mermaid.min.js>)
+	MERMAID_JS="$(MERMAID_JS)" CHROMIUM="$(CHROMIUM)" node scripts/render-diagrams.mjs
+
 ##@ Testing
 
 .PHONY: test

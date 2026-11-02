@@ -1,0 +1,29 @@
+flowchart TD
+    person(["Person with triage access"])
+    subgraph gh["GitHub"]
+        issue["Issue<br/>assignee + schmeide:ready"]
+        app["schmeide GitHub App"]
+        pr["Pull request<br/>opened as the App"]
+    end
+    subgraph control["Control node: schmeide control"]
+        intake["Webhook intake<br/>POST /webhook"]
+        queue[("JetStream<br/>jobs, status, stages")]
+        tokens["Per-job token minting"]
+    end
+    subgraph runner["Runner: schmeide runner, on the steward's machine"]
+        wt["Git worktree on<br/>the issue's branch"]
+        harness["Claude Code or Grok CLI"]
+        gate["Repo gate<br/>e.g. make check test"]
+        review["Reviewer sessions"]
+    end
+    person -- "assign + label" --> issue
+    issue -- "issues event" --> app
+    app -- "signed webhook" --> intake
+    intake -- "publish job" --> queue
+    queue -- "steward's job" --> wt
+    wt -. "asks for a token" .-> tokens
+    tokens -. "installation token" .-> wt
+    wt --> harness --> gate
+    gate -- "push + open" --> pr
+    pr --> review
+    review -- "pass: a person merges,<br/>or factory merge" --> pr

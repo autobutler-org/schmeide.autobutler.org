@@ -18,18 +18,19 @@ make fix      # apply lint and format fixes
 
 ## Layout
 
-| Path                | What lives there                                                       |
-| ------------------- | ---------------------------------------------------------------------- |
-| `app.vue`           | Root layout: header, `<NuxtPage />`, footer                            |
-| `pages/`            | Route components (`index.vue`, `docs/index.vue`, `docs/[...slug].vue`) |
-| `components/`       | Components and their `__tests__` specs                                 |
-| `content/docs/`     | Docs content, authored in Markdown and rendered via `@nuxt/content`    |
-| `data/copy.ts`      | Typed landing-page copy and outbound links                             |
-| `assets/`           | Global styles and design tokens                                        |
-| `public/`           | Files copied verbatim into the build (icons, `og.png`)                 |
-| `nuxt.config.ts`    | Nuxt configuration (site meta, `@nuxt/content` options)                |
-| `content.config.ts` | `@nuxt/content` collection definitions                                 |
-| `vitest.config.ts`  | Vitest-only Vite config for mounting components in isolation           |
+| Path                | What lives there                                                          |
+| ------------------- | ------------------------------------------------------------------------- |
+| `app.vue`           | Root layout: header, `<NuxtPage />`, footer                               |
+| `pages/`            | Route components (`index.vue`, `docs/index.vue`, `docs/[...slug].vue`)    |
+| `components/`       | Components and their `__tests__` specs                                    |
+| `content/docs/`     | Docs content, authored in Markdown and rendered via `@nuxt/content`       |
+| `data/copy.ts`      | Typed landing-page copy and outbound links                                |
+| `diagrams/`         | Mermaid sources, rendered to `public/assets/diagrams/` by `make diagrams` |
+| `assets/`           | Global styles and design tokens                                           |
+| `public/`           | Files copied verbatim into the build (icons, `og.png`)                    |
+| `nuxt.config.ts`    | Nuxt configuration (site meta, `@nuxt/content` options)                   |
+| `content.config.ts` | `@nuxt/content` collection definitions                                    |
+| `vitest.config.ts`  | Vitest-only Vite config for mounting components in isolation              |
 
 ## Where the docs come from
 

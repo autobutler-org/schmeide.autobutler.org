@@ -3,7 +3,7 @@ title: Glossary
 description: The terms schmeide's docs, flags, and issue comments use
 navigation:
   title: Glossary
-  order: 13
+  order: 14
 ---
 
 # Glossary

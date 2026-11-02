@@ -1,0 +1,19 @@
+flowchart TD
+    open["Pull request open<br/>gate passed"] --> rev["Fresh reviewer session"]
+    rev --> verdict{"Verdict"}
+    verdict -- pass --> mergeq{"automate.merge?"}
+    verdict -- "changes" --> fix{"review_fix on<br/>and a round left?"}
+    fix -- yes --> fixer["Fix session, gate, push<br/>same branch"] --> rev
+    fix -- no --> left["review_failed<br/>PR left open for a person"]
+    mergeq -- "off (default)" --> human["pr_opened<br/>a person merges"]
+    mergeq -- on --> bp{"Branch protection<br/>requires approvals?"}
+    bp -- yes --> mf["merge_failed<br/>PR left open"]
+    bp -- "no, or 403/404" --> stack{"Stacked on another<br/>schmeide PR?"}
+    stack -- yes --> below["Wait up to check_wait for it to merge,<br/>restack onto the default branch"]
+    below --> checks
+    stack -- no --> checks{"Check runs"}
+    checks -- "pending or none" --> checks
+    checks -- "first red, round left" --> cifix["One CI fix round"] --> checks
+    checks -- green --> mq{"Base has a<br/>merge queue?"}
+    mq -- yes --> enq["Add to queue,<br/>wait for it to merge"] --> merged["merged"]
+    mq -- no --> mc["Merge commit"] --> merged

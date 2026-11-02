@@ -3,7 +3,7 @@ title: Permissions
 description: The permission floor every agent session starts from, what the runner refuses, and how to opt in to more
 navigation:
   title: Permissions
-  order: 9
+  order: 10
 ---
 
 # Permissions

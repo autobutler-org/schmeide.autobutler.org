@@ -1,0 +1,39 @@
+sequenceDiagram
+    autonumber
+    actor P as Person
+    participant GH as GitHub
+    participant C as Control node
+    participant R as Runner
+    participant A as Agent
+    P->>GH: Assign + schmeide:ready
+    GH->>C: issues webhook
+    C->>C: Verify, build job
+    C->>C: Store job (pending)
+    C-->>GH: 202 created
+    C->>R: Deliver job
+    R->>C: claimed, ask for token
+    C->>GH: Mint installation token
+    C-->>R: Token for one repo
+    R->>GH: Read blocked-by, pick base
+    R->>R: Worktree on {issue}_{slug}
+    R->>R: Read .schmeide/config.toml
+    R->>A: Writer session (issue brief)
+    A-->>R: Edits + PR text
+    R->>R: Run the gate
+    R->>R: Secret scan, push
+    R->>GH: Open PR as the App
+    loop up to --max-review-rounds
+        R->>A: Reviewer session
+        A-->>R: Pass or changes
+        opt changes + review_fix on
+            R->>A: Fix session, gate, push
+        end
+    end
+    alt automate.merge on
+        R->>GH: Green checks, then merge
+        R->>GH: Comment: merged
+    else merge off (default)
+        R->>GH: Comment: PR open
+    end
+    R->>C: Final status
+    R->>GH: Revoke token

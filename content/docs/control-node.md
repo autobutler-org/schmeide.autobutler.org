@@ -3,7 +3,7 @@ title: Running a control node
 description: Ports, TLS, storage, settings, and a reference deployment for the control node
 navigation:
   title: Running a control node
-  order: 8
+  order: 9
 ---
 
 # Running a control node
